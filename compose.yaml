@@ -1,0 +1,20 @@
+services:
+  programacao-web-spring:
+    build: .
+    ports:
+      - "8080:8080"
+  h2-database:
+    image: thomseno/h2
+    ports:
+      - "9092:9092"
+      - "8082:8082"
+    environment:
+      - JAVA_OPTS=-Xmx256m -Xms256m
+  maven:
+    image: maven:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: mvn clean install
