@@ -27,7 +27,8 @@ public class UserResource {
             UserEntity createdUser = userService.save(user);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create user: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to create user: " + e.getMessage());
         }
     }
 
@@ -37,7 +38,8 @@ public class UserResource {
             List<UserEntity> users = userService.findAll();
             return ResponseEntity.status(HttpStatus.OK).body(users);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to fetch users: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to fetch users: " + e.getMessage());
         }
     }
 
@@ -50,20 +52,22 @@ public class UserResource {
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found with id: " + id);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to fetch user: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to fetch user: " + e.getMessage());
         }
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateUser(@PathVariable Long id, @RequestBody UserEntity user) {
         try {
-            user.setId(id); // Ensure the ID is set for update operation
+            user.setId(id);
             UserEntity updatedUser = userService.save(user);
             return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found with id: " + id);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update user: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to update user: " + e.getMessage());
         }
     }
 
@@ -75,7 +79,8 @@ public class UserResource {
         } catch (NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found with id: " + id);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete user: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to delete user: " + e.getMessage());
         }
     }
 }
